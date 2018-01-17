@@ -1,0 +1,24 @@
+version: '2'
+
+services:
+  app-nomount:
+    build: .
+    command: './benchmarker.sh output/benchfile'
+  app-mount-cached:
+    build: .
+    command: './benchmarker.sh output/benchfile'
+    volumes:
+      - .docker/mount-cached:/app/output:cached
+  app-mount-uncached:
+    build: .
+    command: './benchmarker.sh output/benchfile'
+    volumes:
+      - .docker/mount-uncached:/app/output
+  app-named-volume:
+    build: .
+    command: './benchmarker.sh output/benchfile'
+    volumes:
+      - named-volume:/app/output
+
+volumes:
+  named-volume:
